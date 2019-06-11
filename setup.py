@@ -10,6 +10,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 def read(fname):
     return open(os.path.join(here, fname)).read()
 
+
 with open(os.path.join(here, "yaqd_horiba", "VERSION")) as version_file:
     version = version_file.read().strip()
 
@@ -22,14 +23,14 @@ setup(
     python_requires=">=3.7",
     setup_requires=["pytest-runner"],
     tests_require=["pytest", "pytest-cov"],
-    install_requires=["appdirs", "toml"],
+    install_requires=["yaqd-core"],
     extras_require={
         "docs": ["sphinx", "sphinx-gallery>=0.3.0", "sphinx-rtd-theme"],
         "dev": ["black", "pre-commit", "pydocstyle"],
     },
     version=version,
     description="Core structures for yaq component daemons",
-    #long_description=read("README.rst"),
+    # long_description=read("README.rst"),
     author="yaq Developers",
     license="LGPL v3",
     url="http://gitlab.com/yaq/yaqd-horiba",
