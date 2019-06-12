@@ -14,7 +14,6 @@ class MicroHRDaemon(hardware.BaseHardwareDaemon):
         "force_init": True,
         "emulate": False,
     }
-    default_state = {"position": 0, "turret": 1}
 
     def __init__(self, name, config, config_filepath):
         super().__init__(name, config, config_filepath)
@@ -35,9 +34,8 @@ class MicroHRDaemon(hardware.BaseHardwareDaemon):
 
     async def _reset_position(self):
         await self._not_busy.wait()
-        self.controller.MovetoTurret(
-            self._turret - 1
-        )  # Legacy reasons for interface being one-based index
+        # Legacy reasons for interface being one-based index
+        self.controller.MovetoTurret(self._turret - 1)
         self.set_position(self._destinaion)
 
     @hardware.set_action
@@ -64,6 +62,14 @@ class MicroHRDaemon(hardware.BaseHardwareDaemon):
 
     def get_grating_details(self):
         return self.controller.GetCurrentGratingWithDetails()
+
+    def get_state(self):
+        state = super().get_state()
+        state["turret"] =  self._turret
+
+    def _load_state(self, state):
+        super()._load_state(self)
+        self._turret = state.get("turret", 1)
 
 
 if __name__ == "__main__":
