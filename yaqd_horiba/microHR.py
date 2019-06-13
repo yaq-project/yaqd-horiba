@@ -14,7 +14,6 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
         "force_init": True,
         "emulate": False,
     }
-    default_state = {"position": 0, "turret": 1}
 
     def __init__(self, name, config, config_filepath):
         super().__init__(name, config, config_filepath)
@@ -63,6 +62,14 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
 
     def get_grating_details(self):
         return self.controller.GetCurrentGratingWithDetails()
+
+    def get_state(self):
+        state = super().get_state()
+        state["turret"] =  self._turret
+
+    def _load_state(self, state):
+        super()._load_state(self)
+        self._turret = state.get("turret", 1)
 
 
 if __name__ == "__main__":
