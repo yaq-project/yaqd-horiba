@@ -7,7 +7,7 @@ from gen_py import JYMono
 __all__ = ["MicroHRDaemon"]
 
 
-class MicroHRDaemon(hardware.BaseHardwareDaemon):
+class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
     defaults = {
         "make": "Horiba Jobin-Yvon",
         "model": "MicroHR",
@@ -35,10 +35,11 @@ class MicroHRDaemon(hardware.BaseHardwareDaemon):
 
     async def _reset_position(self):
         await self._not_busy.wait()
-        self.controller.MovetoTurret(
-            self._turret - 1
-        )  # Legacy reasons for interface being one-based index
+        # Legacy reasons for interface being one-based index
+        self.controller.MovetoTurret(self._turret - 1)
         self.set_position(self._destinaion)
+        _, _, lo, hi, *_ = self.controller.IsTargetWithinLimits(0, 0)
+        self._limits = [(lo, hi)]
 
     @hardware.set_action
     def set_turret(self, index):
@@ -46,10 +47,9 @@ class MicroHRDaemon(hardware.BaseHardwareDaemon):
             self._turret = index
             loop = asyncio.get_event_loop()
             loop.call_soon(self._reset_position())
-        # TODO limits
 
     def _set_position(self, position):
-        self.controller.MovetoWavelength(destination)
+        self.controller.MovetoWavelength(position)
 
     async def update_state(self):
         while True:
@@ -59,7 +59,6 @@ class MicroHRDaemon(hardware.BaseHardwareDaemon):
             else:
                 self._not_busy.set()
             self._position = self.controller.GetCurrentWavelength()
-            # TODO, do we want to have timeout to poll even when no set action has been called?
             await self._busy.wait()
 
     def get_grating_details(self):
