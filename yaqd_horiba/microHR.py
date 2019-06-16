@@ -1,6 +1,6 @@
 import asyncio
 
-from yaq_daemon_core import hardware
+from yaqd_core import hardware
 
 from gen_py import JYMono
 
@@ -18,7 +18,7 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
     def __init__(self, name, config, config_filepath):
         super().__init__(name, config, config_filepath)
         self.unique_id = config["unique_id"]
-        self.controller = JYMono.Monocromator()
+        self.controller = JYMono.Monochromator()
         self.controller.Uniqueid = self.unique_id
 
         self._busy.set()
@@ -30,22 +30,24 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
         self.serial = self.controller.SerialNumber
 
         loop = asyncio.get_event_loop()
-        loop.call_soon(self._reset_position())
+        loop.create_task(self._reset_position())
 
     async def _reset_position(self):
         await self._not_busy.wait()
         # Legacy reasons for interface being one-based index
         self.controller.MovetoTurret(self._turret - 1)
-        self.set_position(self._destinaion)
-        _, _, lo, hi, *_ = self.controller.IsTargetWithinLimits(0, 0)
+        self.set_position(self._destination)
+        _, lo, hi = self.controller.IsTargetWithinLimits(0, 0)
         self._limits = [(lo, hi)]
 
     @hardware.set_action
     def set_turret(self, index):
         if index != self._turret:
             self._turret = index
+            # Legacy reasons for interface being one-based index
+            self.controller.MovetoTurret(self._turret - 1)
             loop = asyncio.get_event_loop()
-            loop.call_soon(self._reset_position())
+            loop.create_task(self._reset_position())
 
     def _set_position(self, position):
         self.controller.MovetoWavelength(position)
@@ -58,6 +60,7 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
             else:
                 self._not_busy.set()
             self._position = self.controller.GetCurrentWavelength()
+            await asyncio.sleep(0.01)
             await self._busy.wait()
 
     def get_grating_details(self):
@@ -66,9 +69,10 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
     def get_state(self):
         state = super().get_state()
         state["turret"] =  self._turret
+        return state
 
     def _load_state(self, state):
-        super()._load_state(self)
+        super()._load_state(state)
         self._turret = state.get("turret", 1)
 
 
