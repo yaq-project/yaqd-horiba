@@ -1,5 +1,4 @@
 #! /usr/bin/env python3
-
 import os
 from setuptools import setup, find_packages
 
@@ -23,7 +22,7 @@ setup(
     python_requires=">=3.7",
     setup_requires=["pytest-runner"],
     tests_require=["pytest", "pytest-cov"],
-    install_requires=["yaqd-core"],
+    install_requires=["yaqd-core", "pyusb"],
     extras_require={
         "docs": ["sphinx", "sphinx-gallery>=0.3.0", "sphinx-rtd-theme"],
         "dev": ["black", "pre-commit", "pydocstyle"],
@@ -34,6 +33,7 @@ setup(
     author="yaq Developers",
     license="LGPL v3",
     url="http://gitlab.com/yaq/yaqd-horiba",
+    entry_points={"console_scripts": ["yaqd-microhr=yaqd_horiba._microhr:MicroHRDaemon.main"]},
     keywords="spectroscopy science multidimensional hardware",
     classifiers=[
         "Development Status :: 1 - Planning",

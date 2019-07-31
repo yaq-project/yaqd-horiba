@@ -1,3 +1,3 @@
 from .__version__ import *
 
-from .microHR import *
+from ._microhr import *
