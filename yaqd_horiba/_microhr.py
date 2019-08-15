@@ -3,7 +3,7 @@ import struct
 
 import usb.core
 
-from yaqd_core import hardware
+from yaqd_core import hardware, set_action
 
 
 __all__ = ["MicroHRDaemon"]
@@ -30,6 +30,7 @@ IS_BUSY = 5
 
 
 class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
+    _kind = "micro-hr"
     defaults = {
         "make": "Horiba Jobin-Yvon",
         "model": "MicroHR",
@@ -45,7 +46,7 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
         self._busy.set()
 
         # Lie to the device that it speaks US English
-        # Without this, the strings reading from USB don't work
+        # Without this, the strings read from USB don't work
         self._dev._langids = (LANG_ID_US_ENGLISH,)
         self.description = self._dev.product
         self.serial = self._dev.serial_number
@@ -75,7 +76,7 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
         loop = asyncio.get_event_loop()
         loop.create_task(self._reset_position())
 
-    @hardware.set_action
+    @set_action
     def set_turret(self, index):
         print(self._turret, index)
         if index != self._turret:
