@@ -43,7 +43,7 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
         super().__init__(name, config, config_filepath)
         self._dev = usb.core.find(idVendor=JOBIN_YVON_ID_VENDOR, idProduct=MICRO_HR_ID_PRODUCT)
 
-        self._busy.set()
+        self._busy = True
 
         # Lie to the device that it speaks US English
         # Without this, the strings read from USB don't work
@@ -55,8 +55,8 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
 
     async def _reset_position(self):
         print("in reset_position")
-        if self._busy.is_set():
-            await self._not_busy.wait()
+        if self._busy:
+            await self._not_busy_sig.wait()
         print(self._turret)
         self._dev.ctrl_transfer(
             B_REQUEST_OUT,
@@ -64,8 +64,8 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
             wIndex=SET_TURRET,
             data_or_wLength=struct.pack("<i", self._turret),
         )
-        self._busy.set()
-        await self._not_busy.wait()
+        self._busy = True
+        await self._not_busy_sig.wait()
         self.set_position(self._destination)
         # _, lo, hi = self.controller.IsTargetWithinLimits(0, 0)
         # self._limits = [(lo, hi)]
@@ -97,11 +97,7 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
             busy = self._dev.ctrl_transfer(
                 B_REQUEST_IN, BM_REQUEST_TYPE, wIndex=IS_BUSY, data_or_wLength=4
             )
-            busy = struct.unpack("<i", busy)[0]
-            if busy:
-                self._busy.set()
-            else:
-                self._not_busy.set()
+            self._busy = struct.unpack("<i", busy)[0]
             self._position = struct.unpack(
                 "<f",
                 self._dev.ctrl_transfer(
@@ -109,7 +105,7 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
                 ),
             )[0]
             await asyncio.sleep(0.01)
-            await self._busy.wait()
+            await self._busy_sig.wait()
 
     def get_state(self):
         state = super().get_state()
