@@ -3,11 +3,14 @@ import struct
 
 import usb.core
 
-from yaqd_core import hardware, set_action
+from yaqd_core import logging, hardware, set_action
 
 
 __all__ = ["MicroHRDaemon"]
 
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 LANG_ID_US_ENGLISH = 0x409
 
@@ -50,14 +53,17 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
         self._dev._langids = (LANG_ID_US_ENGLISH,)
         self.description = self._dev.product
         self.serial = self._dev.serial_number
+        self._gratings = [{"lines_per_mm": 1200}, {"lines_per_mm": 1200}]
+        [g.update(c) for g, c in zip(self._gratings, config.get("gratings"))]
 
         self.home()
 
     async def _reset_position(self):
-        print("in reset_position")
+        logger.debug("in reset_position")
+        
         if self._busy:
             await self._not_busy_sig.wait()
-        print(self._turret)
+        logger.debug(self._turret)
         self._dev.ctrl_transfer(
             B_REQUEST_OUT,
             BM_REQUEST_TYPE,
@@ -78,13 +84,17 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
 
     @set_action
     def set_turret(self, index):
-        print(self._turret, index)
+        logger.debug(self._turret, index)
         if index != self._turret:
             self._turret = index
             loop = asyncio.get_event_loop()
             loop.create_task(self._reset_position())
 
     def _set_position(self, position):
+        # Mono assumes 1200 lines/mm, adjust accordingly
+        logger.debug(position)
+        position = position * self._gratings[self._turret]["lines_per_mm"] / 1200.0
+        logger.debug(position)
         self._dev.ctrl_transfer(
             B_REQUEST_OUT,
             BM_REQUEST_TYPE,
@@ -104,6 +114,9 @@ class MicroHRDaemon(hardware.ContinuousHardwareDaemon):
                     B_REQUEST_IN, BM_REQUEST_TYPE, wIndex=READ_WAVELENGTH, data_or_wLength=4
                 ),
             )[0]
+            self._position = self._position / (
+                self._gratings[self._turret]["lines_per_mm"] / 1200.0
+            )
             await asyncio.sleep(0.01)
             await self._busy_sig.wait()
 
