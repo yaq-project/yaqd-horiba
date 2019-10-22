@@ -33,7 +33,7 @@ setup(
     author="yaq Developers",
     license="LGPL v3",
     url="http://gitlab.com/yaq/yaqd-horiba",
-    entry_points={"console_scripts": ["yaqd-microhr=yaqd_horiba._microhr:MicroHRDaemon.main"]},
+    entry_points={"console_scripts": ["yaqd-microhr=yaqd_horiba._microhr:MicroHR.main"]},
     keywords="spectroscopy science multidimensional hardware",
     classifiers=[
         "Development Status :: 1 - Planning",
