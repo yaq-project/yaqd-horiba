@@ -1,7 +1,7 @@
 import asyncio
 import struct
 
-import usb.core
+import usb.core  # type: ignore
 
 import yaqd_core
 
@@ -60,7 +60,7 @@ class MicroHR(yaqd_core.ContinuousHardware):
 
     async def _reset_position(self):
         logger.debug("in reset_position")
-        
+
         if self._busy:
             await self._not_busy_sig.wait()
         logger.debug(self._turret)
