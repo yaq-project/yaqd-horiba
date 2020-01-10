@@ -1,4 +1,4 @@
-"""Define WrightTools version."""
+"""Define version."""
 
 
 # --- import --------------------------------------------------------------------------------------
@@ -36,4 +36,4 @@ if p.exists():
     if __branch__ != "master":
         __version__ += "+" + __branch__
 else:
-    __branch__ = None
+    __branch__ = ""
