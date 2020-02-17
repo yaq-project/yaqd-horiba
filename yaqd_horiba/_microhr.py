@@ -3,14 +3,14 @@ import struct
 
 import usb.core  # type: ignore
 
-import yaqd_core
+from yaqd_core import ContinuousHardware, logging
 
 
 __all__ = ["MicroHR"]
 
 
-logger = yaqd_core.logging.getLogger(__name__)
-logger.setLevel(yaqd_core.logging.INFO)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 LANG_ID_US_ENGLISH = 0x409
 
@@ -32,7 +32,7 @@ READ_TURRET = 16
 IS_BUSY = 5
 
 
-class MicroHR(yaqd_core.ContinuousHardware):
+class MicroHR(ContinuousHardware):
     _kind = "micro-hr"
     defaults = {
         "make": "Horiba Jobin-Yvon",
@@ -82,8 +82,8 @@ class MicroHR(yaqd_core.ContinuousHardware):
         loop = asyncio.get_event_loop()
         loop.create_task(self._reset_position())
 
-    @yaqd_core.set_action
     def set_turret(self, index):
+        self._busy = True
         logger.debug(self._turret, index)
         if index != self._turret:
             self._turret = index
