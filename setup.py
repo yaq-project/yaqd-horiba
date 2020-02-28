@@ -20,8 +20,6 @@ setup(
     packages=find_packages(exclude=("tests", "tests.*")),
     package_data=extra_files,
     python_requires=">=3.7",
-    setup_requires=["pytest-runner"],
-    tests_require=["pytest", "pytest-cov"],
     install_requires=["yaqd-core", "pyusb"],
     extras_require={
         "docs": ["sphinx", "sphinx-gallery>=0.3.0", "sphinx-rtd-theme"],
