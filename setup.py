@@ -13,6 +13,10 @@ def read(fname):
 with open(os.path.join(here, "yaqd_horiba", "VERSION")) as version_file:
     version = version_file.read().strip()
 
+with open("README.md") as readme_file:
+    readme = readme_file.read()
+
+
 extra_files = {"yaqd_horiba": ["VERSION"]}
 
 setup(
@@ -27,7 +31,8 @@ setup(
     },
     version=version,
     description="Yaq daemons for Horiba Jobin Yvon hardware",
-    # long_description=read("README.rst"),
+    long_description=readme,
+    long_description_content_type="text/markdown",
     author="yaq Developers",
     license="LGPL v3",
     url="http://gitlab.com/yaq/yaqd-horiba",
