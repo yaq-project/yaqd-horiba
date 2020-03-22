@@ -34,6 +34,7 @@ IS_BUSY = 5
 
 class MicroHR(ContinuousHardware):
     _kind = "micro-hr"
+    traits = ["has-turret", "is-homeable"]
     defaults = {
         "make": "Horiba Jobin-Yvon",
         "model": "MicroHR",
