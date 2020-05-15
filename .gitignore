@@ -38,6 +38,9 @@ flycheck_*.el
 *.svg
 *.ico
 
+# mypy
+.mypy_cache/
+
 # tests / coverage reports
 .coverage
 .coverage.*
