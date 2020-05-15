@@ -9,9 +9,6 @@ from yaqd_core import ContinuousHardware, logging
 __all__ = ["MicroHR"]
 
 
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-
 LANG_ID_US_ENGLISH = 0x409
 
 # Identifiers of the product in USB spec
@@ -60,11 +57,11 @@ class MicroHR(ContinuousHardware):
         self.home()
 
     async def _reset_position(self):
-        logger.debug("in reset_position")
+        self.logger.debug("in reset_position")
 
         if self._busy:
             await self._not_busy_sig.wait()
-        logger.debug(self._turret)
+        self.logger.debug(self._turret)
         self._dev.ctrl_transfer(
             B_REQUEST_OUT,
             BM_REQUEST_TYPE,
@@ -85,7 +82,7 @@ class MicroHR(ContinuousHardware):
 
     def set_turret(self, index):
         self._busy = True
-        logger.debug(self._turret, index)
+        self.logger.debug(self._turret, index)
         if index != self._turret:
             self._turret = index
             loop = asyncio.get_event_loop()
@@ -93,9 +90,9 @@ class MicroHR(ContinuousHardware):
 
     def _set_position(self, position):
         # Mono assumes 1200 lines/mm, adjust accordingly
-        logger.debug(position)
+        self.logger.debug(position)
         position = position * self._gratings[self._turret]["lines_per_mm"] / 1200.0
-        logger.debug(position)
+        self.logger.debug(position)
         self._dev.ctrl_transfer(
             B_REQUEST_OUT,
             BM_REQUEST_TYPE,
