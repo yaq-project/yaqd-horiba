@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Remove set_action decorator, use from syntax
 - Remove pytest-runner
 - Use daemon level loggers
+- refactored gitlab-ci
 
 ## [0.1.0]
 
