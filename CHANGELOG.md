@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - added changelog
 - add gitlab-ci
 - add traits support
+- added daemon-level version, see [YEP-105](https://yeps.yaq.fyi/105/)
 
 ### Changed
 - Remove set_action decorator, use from syntax
