@@ -5,6 +5,8 @@ import usb.core  # type: ignore
 
 from yaqd_core import ContinuousHardware, logging
 
+from .__version__ import __branch__
+
 
 __all__ = ["MicroHR"]
 
@@ -31,6 +33,7 @@ IS_BUSY = 5
 
 class MicroHR(ContinuousHardware):
     _kind = "micro-hr"
+    _version = "1.0.0" + f"+{__branch__}" if __branch__ else ""
     traits = ["has-turret", "is-homeable"]
     defaults = {
         "make": "Horiba Jobin-Yvon",
