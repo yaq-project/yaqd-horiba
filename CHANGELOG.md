@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 ### Changed
 - Remove set_action decorator, use from syntax
 - Remove pytest-runner
+- Use daemon level loggers
 
 ## [0.1.0]
 
