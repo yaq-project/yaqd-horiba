@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Remove pytest-runner
 - Use daemon level loggers
 - refactored gitlab-ci
+- updated readme
 
 ## [0.1.0]
 
