@@ -1,6 +1,39 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "yaqd_horiba"
+author = "yaq Developers"
+author-email = "git@ksunden.space"
+home-page = "https://yaq.fyi"
+description-file = "README.md"
+requires-python = ">=3.7"
+requires = ["yaqd-core>=2020.06.3", "pyusb"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Topic :: Scientific/Engineering",
+]
+
+[tool.flit.metadata.urls]
+Source = "https://gitlab.com/yaq/yaqd-horiba"
+Issues = "https://gitlab.com/yaq/yaqd-horiba/issues"
+
+[tool.flit.metadata.requires-extra]
+dev = ["black", "pre-commit"]
+
+[tool.flit.scripts]
+yaqd-micro-hr="yaqd_horiba._microhr:MicroHR.main"
+
 [tool.black]
 line-length = 99
-target-version = ['py36', 'py37', 'py38']
+target-version = ['py37', 'py38']
 include = '\.pyi?$'
 exclude = '''
 /(
@@ -15,5 +48,3 @@ exclude = '''
   | dist
 )/
 '''
-
-
