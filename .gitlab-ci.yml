@@ -13,13 +13,14 @@ before_script:
   - pip install -U virtualenv
   - virtualenv venv
   - source venv/bin/activate
-  - pip install -U twine
+  - pip install -U flit
   - pip install -U pytest
   - pip install -U mypy
   - pip install -U yaqc
   - pip install -U yaqd-core
   - pip install -U pyusb
-  - pip install -e .
+  - pip install -U yaq-traits
+  - pip install .
 
 # test stage
 mypy:
@@ -32,12 +33,17 @@ entry:
     - yaqd-micro-hr --version
     - yaqd-micro-hr -h
 
+traits:
+  stage: test
+  script:
+    - for i in yaqd_horiba/*.avpr; do yaq-traits check $i; done
+
+
 # deploy stage
-twine:
+pypi:
   stage: deploy
   script:
-    - python setup.py sdist bdist_wheel
-    - twine upload dist/*
+      - flit publish
   artifacts:
     paths:
       - dist/*

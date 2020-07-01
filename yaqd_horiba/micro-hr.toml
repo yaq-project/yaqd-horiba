@@ -1,0 +1,18 @@
+protocol = "micro-hr"
+doc = "Horiba Jobin-Yvon Micro-Hr monochromator."
+traits = ["has-turret", "is-homeable", "has-limits", "is-daemon"]
+
+[links]
+source = "https://gitlab.com/yaq/yaqd-horiba"
+bugtracker = "https://gitlab.com/yaq/yaqd-horiba/issues"
+manufacturer = "https://www.horiba.com/en_en/products/detail/action/show/Product/microhr-series-1591/"
+
+[installation]
+PyPI = "https://pypi.org/project/yaqd-horiba/"
+
+[config]
+gratings.type = {"type"="array", "items"="float"}
+gratings.default = [1200, 1200]
+gratings.doc = "Array of lines/mm for the installed turrets"
+make.default = "Horiba Jobin-Yvon"
+model.default = "MicroHR"
