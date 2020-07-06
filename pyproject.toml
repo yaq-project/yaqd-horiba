@@ -4,6 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [tool.flit.metadata]
 module = "yaqd_horiba"
+dist-name = "yaqd-horiba"
 author = "yaq Developers"
 author-email = "git@ksunden.space"
 home-page = "https://yaq.fyi"
