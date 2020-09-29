@@ -82,6 +82,9 @@ class MicroHR(ContinuousHardware):
             loop.create_task(self._reset_position())
             self._state["hw_limits"] = (0, 1580 * 1200 / self._gratings[index])
 
+    def get_turret(self):
+        return self._state["turret"]
+
     def _set_position(self, position):
         # Mono assumes 1200 lines/mm, adjust accordingly
         self.logger.debug(position)

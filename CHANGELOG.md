@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Added
+- added get-turret
+
 ## [2020.07.0]
 
 ### Changed
