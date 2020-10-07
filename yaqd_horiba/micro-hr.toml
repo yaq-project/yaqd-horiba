@@ -1,6 +1,7 @@
 protocol = "micro-hr"
 doc = "Horiba Jobin-Yvon Micro-Hr monochromator."
 traits = ["has-turret", "is-homeable", "has-limits", "is-daemon"]
+hardware = ["horiba:microhr"]
 
 [links]
 source = "https://gitlab.com/yaq/yaqd-horiba"
