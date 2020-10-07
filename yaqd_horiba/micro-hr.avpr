@@ -59,6 +59,9 @@
         }
     },
     "doc": "Horiba Jobin-Yvon Micro-Hr monochromator.",
+    "hardware": [
+        "horiba:microhr"
+    ],
     "installation": {
         "PyPI": "https://pypi.org/project/yaqd-horiba/"
     },
@@ -187,8 +190,6 @@
             "response": "null"
         }
     },
-    "name": "is-homeable",
-    "protcol": "has-position",
     "protocol": "micro-hr",
     "requires": [],
     "state": {
@@ -209,15 +210,48 @@
             "type": "float"
         },
         "turret": {
-            "default": NaN,
-            "type": "int"
+            "default": null,
+            "doc": "Current turret index",
+            "type": [
+                "null",
+                "int"
+            ]
         }
     },
+    "trait": "has-position",
     "traits": [
-        "has-limits",
         "has-turret",
         "has-position",
         "is-daemon",
+        "has-limits",
         "is-homeable"
+    ],
+    "types": [
+        {
+            "fields": [
+                {
+                    "name": "shape",
+                    "type": {
+                        "items": "int",
+                        "type": "array"
+                    }
+                },
+                {
+                    "name": "typestr",
+                    "type": "string"
+                },
+                {
+                    "name": "data",
+                    "type": "bytes"
+                },
+                {
+                    "name": "version",
+                    "type": "int"
+                }
+            ],
+            "logicalType": "ndarray",
+            "name": "ndarray",
+            "type": "record"
+        }
     ]
 }
