@@ -3,7 +3,7 @@ import struct
 
 import usb.core  # type: ignore
 
-from yaqd_core import ContinuousHardware, logging
+from yaqd_core import HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon
 
 
 __all__ = ["MicroHR"]
@@ -29,7 +29,7 @@ READ_TURRET = 16
 IS_BUSY = 5
 
 
-class MicroHR(ContinuousHardware):
+class MicroHR(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
     _kind = "micro-hr"
 
     def __init__(self, name, config, config_filepath):
