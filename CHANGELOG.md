@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ### Changed
 - regenerated avpr based on recent traits update
+- use new trait system in core
 
 ## [2020.07.0]
 

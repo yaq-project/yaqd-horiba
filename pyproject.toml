@@ -10,7 +10,7 @@ author-email = "git@ksunden.space"
 home-page = "https://yaq.fyi"
 description-file = "README.md"
 requires-python = ">=3.7"
-requires = ["yaqd-core>=2020.06.3", "pyusb"]
+requires = ["yaqd-core>=2020.10.1", "pyusb"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
