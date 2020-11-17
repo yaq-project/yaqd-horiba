@@ -63,9 +63,8 @@ class MicroHR(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
         )
         self._busy = True
         await self._not_busy_sig.wait()
+        self._state["hw_limits"] = (0, 1580 * 1200 / self._gratings[self._state["turret"]])
         self.set_position(self._state["destination"])
-        # _, lo, hi = self.controller.IsTargetWithinLimits(0, 0)
-        # self._limits = [(lo, hi)]
 
     def home(self):
         # Send "Initialize command, which homes the motor"
@@ -80,7 +79,6 @@ class MicroHR(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
             self._state["turret"] = index
             loop = asyncio.get_event_loop()
             loop.create_task(self._reset_position())
-            self._state["hw_limits"] = (0, 1580 * 1200 / self._gratings[index])
 
     def get_turret(self):
         return self._state["turret"]
