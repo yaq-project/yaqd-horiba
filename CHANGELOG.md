@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## Added
+- conda-forge as installation source
+
 ## [2020.11.1]
 
 ### Fixed

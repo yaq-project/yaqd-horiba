@@ -10,6 +10,7 @@ manufacturer = "https://www.horiba.com/en_en/products/detail/action/show/Product
 
 [installation]
 PyPI = "https://pypi.org/project/yaqd-horiba/"
+conda-forge = "https://anaconda.org/conda-forge/yaqd-horiba/"
 
 [config]
 gratings.type = {"type"="array", "items"="float"}
