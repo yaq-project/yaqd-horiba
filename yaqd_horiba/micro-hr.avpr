@@ -69,7 +69,8 @@
         "horiba:microhr"
     ],
     "installation": {
-        "PyPI": "https://pypi.org/project/yaqd-horiba/"
+        "PyPI": "https://pypi.org/project/yaqd-horiba/",
+        "conda-forge": "https://anaconda.org/conda-forge/yaqd-horiba/"
     },
     "links": {
         "bugtracker": "https://gitlab.com/yaq/yaqd-horiba/issues",
@@ -245,11 +246,11 @@
         }
     },
     "traits": [
-        "has-turret",
         "is-homeable",
-        "is-daemon",
         "has-position",
-        "has-limits"
+        "is-daemon",
+        "has-limits",
+        "has-turret"
     ],
     "types": [
         {
