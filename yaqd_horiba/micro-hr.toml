@@ -18,3 +18,6 @@ gratings.default = [1200, 1200]
 gratings.doc = "Array of lines/mm for the installed turrets"
 make.default = "Horiba Jobin-Yvon"
 model.default = "MicroHR"
+
+[state]
+turret.default = 0
