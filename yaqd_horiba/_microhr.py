@@ -36,7 +36,7 @@ class MicroHR(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
         # TODO: Support multiple monos on the same machine
         super().__init__(name, config, config_filepath)
         try:
-            from usb.backend import libusb0
+            from usb.backend import libusb0  # type: ignore
 
             backend = libusb0.get_backend()
         except:
