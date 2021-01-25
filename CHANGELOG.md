@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ### Fixed
 - Set default turret to 0 instead of null
+- prefer libusb0 backend, avoiding hard crash condition on some systems
 
 ### Added
 - conda-forge as installation source

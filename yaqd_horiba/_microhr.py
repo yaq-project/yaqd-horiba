@@ -35,7 +35,16 @@ class MicroHR(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
     def __init__(self, name, config, config_filepath):
         # TODO: Support multiple monos on the same machine
         super().__init__(name, config, config_filepath)
-        self._dev = usb.core.find(idVendor=JOBIN_YVON_ID_VENDOR, idProduct=MICRO_HR_ID_PRODUCT)
+        try:
+            from usb.backend import libusb0
+
+            backend = libusb0.get_backend()
+        except:
+            # Fall back on default behavior if _anything_ goes wrong with specifing libusb0
+            backend = None
+        self._dev = usb.core.find(
+            idVendor=JOBIN_YVON_ID_VENDOR, idProduct=MICRO_HR_ID_PRODUCT, backend=backend
+        )
 
         self._busy = True
 
