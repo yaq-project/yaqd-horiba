@@ -63,7 +63,7 @@ class MicroHR(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
         )
         self._busy = True
         await self._not_busy_sig.wait()
-        self._state["hw_limits"] = (0, 1580 * 1200 / self._gratings[self._state["turret"]])
+        self._state["hw_limits"] = (0.0, 1580 * 1200 / self._gratings[self._state["turret"]])
         self.set_position(self._state["destination"])
 
     def home(self):

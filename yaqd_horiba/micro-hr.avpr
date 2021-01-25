@@ -236,7 +236,7 @@
             "type": "double"
         },
         "turret": {
-            "default": null,
+            "default": 0,
             "doc": "Current turret index",
             "origin": "has-turret",
             "type": [
@@ -246,11 +246,11 @@
         }
     },
     "traits": [
-        "is-homeable",
-        "has-position",
         "is-daemon",
-        "has-limits",
-        "has-turret"
+        "has-position",
+        "has-turret",
+        "is-homeable",
+        "has-limits"
     ],
     "types": [
         {
