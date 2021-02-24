@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Fixed
+- added forgotten config options to is-daemon: enable, log_level, and log_to_file
+
 ## [2021.1.0]
 
 ### Fixed
