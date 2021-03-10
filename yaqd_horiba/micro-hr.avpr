@@ -314,11 +314,11 @@
         }
     },
     "traits": [
-        "has-turret",
         "has-limits",
-        "is-homeable",
+        "has-position",
+        "has-turret",
         "is-daemon",
-        "has-position"
+        "is-homeable"
     ],
     "types": [
         {
