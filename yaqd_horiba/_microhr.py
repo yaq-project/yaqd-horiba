@@ -9,5 +9,5 @@ __all__ = ["MicroHR"]
 
 
 class MicroHR(HoribaMono):
-    _kind = "micro-hr"
+    _kind = "horiba-micro-hr"
     _ID_PRODUCT = MICRO_HR_ID_PRODUCT

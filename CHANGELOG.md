@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Changed
+- micro-hr renamed to horiba-micro-hr for consistency in the ecosystem
+
 ### Fixed
 - added forgotten config options to is-daemon: enable, log_level, and log_to_file
 
