@@ -11,3 +11,4 @@ yaq daemons for Horiba Jobin-Yvon hardware
 
 This package contains the following daemon(s):
 - [yaqd-micro-hr](https://yaq.fyi/daemons/micro-hr/)
+- [yaqd-horiba-ihr320](https://yaq.fyi/daemons/micro-hr/)

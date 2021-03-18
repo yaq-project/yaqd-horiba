@@ -31,6 +31,7 @@ dev = ["black", "pre-commit"]
 
 [tool.flit.scripts]
 yaqd-micro-hr="yaqd_horiba._microhr:MicroHR.main"
+yaqd-horiba-ihr320="yaqd_horiba._horiba_ihr:HoribaIHR320.main"
 
 [tool.black]
 line-length = 99
