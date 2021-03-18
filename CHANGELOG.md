@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 ### Fixed
 - added forgotten config options to is-daemon: enable, log_level, and log_to_file
 
+### Added
+- horiba-ihr320 daemon
+
 ## [2021.1.0]
 
 ### Fixed

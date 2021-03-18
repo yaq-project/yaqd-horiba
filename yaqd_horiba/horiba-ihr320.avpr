@@ -1,0 +1,519 @@
+{
+    "config": {
+        "enable": {
+            "default": true,
+            "doc": "Disable this daemon. The kind entry-point will not attempt to start this daemon.",
+            "origin": "is-daemon",
+            "type": "boolean"
+        },
+        "gratings": {
+            "default": [
+                1200,
+                1200
+            ],
+            "doc": "Array of lines/mm for the installed turrets",
+            "type": {
+                "items": "float",
+                "type": "array"
+            }
+        },
+        "limits": {
+            "default": [
+                -Infinity,
+                Infinity
+            ],
+            "doc": "Configuration limits are strictly optional.",
+            "items": "double",
+            "origin": "has-limits",
+            "type": "array"
+        },
+        "log_level": {
+            "default": "info",
+            "doc": "Set daemon log-level.",
+            "origin": "is-daemon",
+            "type": {
+                "name": "level",
+                "symbols": [
+                    "debug",
+                    "info",
+                    "notice",
+                    "warning",
+                    "error",
+                    "critical",
+                    "alert",
+                    "emergency"
+                ],
+                "type": "enum"
+            }
+        },
+        "log_to_file": {
+            "default": false,
+            "doc": "Optionally force logging to a file.",
+            "origin": "is-daemon",
+            "type": "boolean"
+        },
+        "make": {
+            "default": "Horiba Jobin-Yvon",
+            "origin": "is-daemon",
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "model": {
+            "default": "IHR320",
+            "origin": "is-daemon",
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "out_of_limits": {
+            "default": "closest",
+            "doc": "Control behavior of daemon when set_position is given a value outside of limits.",
+            "name": "out_of_limits",
+            "origin": "has-limits",
+            "symbols": [
+                "closest",
+                "ignore",
+                "error"
+            ],
+            "type": "enum"
+        },
+        "port": {
+            "doc": "TCP port for daemon to occupy.",
+            "origin": "is-daemon",
+            "type": "int"
+        },
+        "serial": {
+            "default": null,
+            "doc": "Serial number for the particular device represented by the daemon",
+            "origin": "is-daemon",
+            "type": [
+                "null",
+                "string"
+            ]
+        }
+    },
+    "doc": "Horiba Jobin-Yvon Micro-Hr monochromator.",
+    "fields": {
+        "destination": {
+            "fields": {
+                "dynamic": true,
+                "getter": "get_destination",
+                "kind": "normal",
+                "type": "double"
+            },
+            "name": "field",
+            "type": "record"
+        },
+        "entrance_mirror": {
+            "getter": "get_entrance_mirror",
+            "setter": "set_entrance_mirror",
+            "type": "mirror_setting"
+        },
+        "exit_mirror": {
+            "getter": "get_exit_mirror",
+            "setter": "set_exit_mirror",
+            "type": "mirror_setting"
+        },
+        "front_entrance_slit": {
+            "getter": "get_front_entrance_slit",
+            "setter": "set_front_entrance_slit",
+            "type": "double"
+        },
+        "front_exit_slit": {
+            "getter": "get_front_exit_slit",
+            "setter": "set_front_exit_slit",
+            "type": "double"
+        },
+        "limits": {
+            "fields": {
+                "dynamic": true,
+                "getter": "get_limits",
+                "kind": "normal",
+                "type": {
+                    "items": "double",
+                    "type": "array"
+                }
+            },
+            "name": "field",
+            "type": "record"
+        },
+        "origin": "has-position",
+        "position": {
+            "fields": {
+                "dynamic": true,
+                "getter": "get_position",
+                "kind": "hinted",
+                "setter": "set_position",
+                "type": "double"
+            },
+            "name": "field",
+            "type": "record"
+        },
+        "side_entrance_slit": {
+            "getter": "get_side_entrance_slit",
+            "setter": "set_side_entrance_slit",
+            "type": "double"
+        },
+        "side_exit_slit": {
+            "getter": "get_side_exit_slit",
+            "setter": "set_side_exit_slit",
+            "type": "double"
+        }
+    },
+    "hardware": [
+        "horiba:ihr320"
+    ],
+    "installation": {
+        "PyPI": "https://pypi.org/project/yaqd-horiba/",
+        "conda-forge": "https://anaconda.org/conda-forge/yaqd-horiba/"
+    },
+    "links": {
+        "bugtracker": "https://gitlab.com/yaq/yaqd-horiba/issues",
+        "manufacturer": "https://www.horiba.com/en_en/products/detail/action/show/Product/ihr-series-1590/",
+        "source": "https://gitlab.com/yaq/yaqd-horiba"
+    },
+    "messages": {
+        "busy": {
+            "doc": "Returns true if daemon is currently busy.",
+            "origin": "is-daemon",
+            "request": [],
+            "response": "boolean"
+        },
+        "get_config": {
+            "doc": "Full configuration for the individual daemon as defined in the TOML file.\nThis includes defaults and shared settings not directly specified in the daemon-specific TOML table.\n",
+            "origin": "is-daemon",
+            "request": [],
+            "response": "string"
+        },
+        "get_config_filepath": {
+            "doc": "String representing the absolute filepath of the configuration file on the host machine.\n",
+            "origin": "is-daemon",
+            "request": [],
+            "response": "string"
+        },
+        "get_destination": {
+            "doc": "Get current daemon destination.",
+            "origin": "has-position",
+            "request": [],
+            "response": "double"
+        },
+        "get_entrance_mirror": {
+            "request": [],
+            "response": "mirror_setting"
+        },
+        "get_exit_mirror": {
+            "request": [],
+            "response": "mirror_setting"
+        },
+        "get_front_entrance_slit": {
+            "request": [],
+            "response": "double"
+        },
+        "get_front_exit_slit": {
+            "request": [],
+            "response": "double"
+        },
+        "get_limits": {
+            "doc": "Get daemon limits.Limits will be the <a href='https://en.wikipedia.org/wiki/Intersection_(set_theory)'>intersection</a> of config limits and driver limits (when appliciable).",
+            "origin": "has-limits",
+            "request": [],
+            "response": {
+                "items": "double",
+                "type": "array"
+            }
+        },
+        "get_position": {
+            "doc": "Get current daemon position.",
+            "origin": "has-position",
+            "request": [],
+            "response": "double"
+        },
+        "get_side_entrance_slit": {
+            "request": [],
+            "response": "double"
+        },
+        "get_side_exit_slit": {
+            "request": [],
+            "response": "double"
+        },
+        "get_state": {
+            "doc": "Get version of the running daemon",
+            "origin": "is-daemon",
+            "request": [],
+            "response": "string"
+        },
+        "get_turret": {
+            "doc": "Get current turret index.",
+            "origin": "has-turret",
+            "request": [],
+            "response": "int"
+        },
+        "get_units": {
+            "doc": "Get units of daemon. These units apply to the position and destination fields.",
+            "origin": "has-position",
+            "request": [],
+            "response": [
+                "null",
+                "string"
+            ]
+        },
+        "home": {
+            "doc": "Initiates the homing procedure.\nThe daemon will report as busy during the homing procedure.\n After the homing procedure is complete, the daemon will return to the current destination.\n",
+            "origin": "is-homeable",
+            "request": [],
+            "response": "null"
+        },
+        "id": {
+            "doc": "JSON object with information to identify the daemon, including name, kind, make, model, serial.\n",
+            "origin": "is-daemon",
+            "request": [],
+            "response": {
+                "type": "map",
+                "values": [
+                    "null",
+                    "string"
+                ]
+            }
+        },
+        "in_limits": {
+            "doc": "Check if a given position is within daemon limits.",
+            "origin": "has-limits",
+            "request": [
+                {
+                    "name": "position",
+                    "type": "double"
+                }
+            ],
+            "response": "boolean"
+        },
+        "set_entrance_mirror": {
+            "request": [
+                {
+                    "name": "side",
+                    "type": "mirror_setting"
+                }
+            ],
+            "response": "null"
+        },
+        "set_exit_mirror": {
+            "request": [
+                {
+                    "name": "side",
+                    "type": "mirror_setting"
+                }
+            ],
+            "response": "null"
+        },
+        "set_front_entrance_slit": {
+            "request": [
+                {
+                    "doc": "width in mm",
+                    "name": "width",
+                    "type": "double"
+                }
+            ],
+            "response": "null"
+        },
+        "set_front_exit_slit": {
+            "request": [
+                {
+                    "doc": "width in mm",
+                    "name": "width",
+                    "type": "double"
+                }
+            ],
+            "response": "null"
+        },
+        "set_position": {
+            "doc": "Give the daemon a new destination, and begin motion towards that destination.",
+            "origin": "has-position",
+            "request": [
+                {
+                    "name": "position",
+                    "type": "double"
+                }
+            ],
+            "response": "null"
+        },
+        "set_relative": {
+            "doc": "Give the daemon a new destination relative to its current position. Daemon will immediately begin motion towards new destination. Returns new destination.",
+            "origin": "has-position",
+            "request": [
+                {
+                    "name": "distance",
+                    "type": "double"
+                }
+            ],
+            "response": "double"
+        },
+        "set_side_entrance_slit": {
+            "request": [
+                {
+                    "doc": "width in mm",
+                    "name": "width",
+                    "type": "double"
+                }
+            ],
+            "response": "null"
+        },
+        "set_side_exit_slit": {
+            "request": [
+                {
+                    "doc": "width in mm",
+                    "name": "width",
+                    "type": "double"
+                }
+            ],
+            "response": "null"
+        },
+        "set_turret": {
+            "doc": "Set the turret to a given index.",
+            "origin": "has-turret",
+            "request": [
+                {
+                    "name": "turret",
+                    "type": "int"
+                }
+            ],
+            "response": "null"
+        },
+        "shutdown": {
+            "doc": "Cleanly shutdown (or restart) daemon.",
+            "origin": "is-daemon",
+            "request": [
+                {
+                    "default": false,
+                    "name": "restart",
+                    "type": "boolean"
+                }
+            ],
+            "response": "null"
+        }
+    },
+    "protocol": "horiba-ihr320",
+    "requires": [],
+    "state": {
+        "destination": {
+            "default": NaN,
+            "origin": "has-position",
+            "type": "double"
+        },
+        "hw_limits": {
+            "default": [
+                -Infinity,
+                Infinity
+            ],
+            "items": "double",
+            "origin": "has-limits",
+            "type": "array"
+        },
+        "mirrors": {
+            "default": [
+                "front",
+                "front"
+            ],
+            "doc": "Position of the mirror, entrance then exit.",
+            "type": {
+                "items": "mirror_setting",
+                "type": "array"
+            }
+        },
+        "mirrors_dest": {
+            "default": [
+                "front",
+                "front"
+            ],
+            "doc": "Destination of the mirror, entrance, then exit",
+            "type": {
+                "items": "mirror_setting",
+                "type": "array"
+            }
+        },
+        "position": {
+            "default": NaN,
+            "origin": "has-position",
+            "type": "double"
+        },
+        "slits": {
+            "default": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "doc": "Width of each slit in mm. order is Front Entrance, Side Entrance, Front Exit, Side Exit",
+            "type": {
+                "items": "float",
+                "type": "array"
+            }
+        },
+        "slits_dest": {
+            "default": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "doc": "Destination of each slit in mm. order is Front Entrance, Side Entrance, Front Exit, Side Exit",
+            "type": {
+                "items": "float",
+                "type": "array"
+            }
+        },
+        "turret": {
+            "default": 0,
+            "doc": "Current turret index",
+            "origin": "has-turret",
+            "type": [
+                "null",
+                "int"
+            ]
+        }
+    },
+    "traits": [
+        "has-limits",
+        "has-position",
+        "has-turret",
+        "is-daemon",
+        "is-homeable"
+    ],
+    "types": [
+        {
+            "name": "mirror_setting",
+            "symbols": [
+                "front",
+                "side"
+            ],
+            "type": "enum"
+        },
+        {
+            "fields": [
+                {
+                    "name": "shape",
+                    "type": {
+                        "items": "int",
+                        "type": "array"
+                    }
+                },
+                {
+                    "name": "typestr",
+                    "type": "string"
+                },
+                {
+                    "name": "data",
+                    "type": "bytes"
+                },
+                {
+                    "name": "version",
+                    "type": "int"
+                }
+            ],
+            "logicalType": "ndarray",
+            "name": "ndarray",
+            "type": "record"
+        }
+    ]
+}

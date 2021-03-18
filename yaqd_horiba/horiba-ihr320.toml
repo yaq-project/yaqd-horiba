@@ -1,0 +1,95 @@
+protocol = "horiba-ihr320"
+doc = "Horiba Jobin-Yvon Micro-Hr monochromator."
+traits = ["has-turret", "is-homeable", "has-limits", "is-daemon"]
+hardware = ["horiba:ihr320"]
+
+[[types]]
+
+type = "enum"
+name = "mirror_setting"
+symbols = ["front", "side"]
+
+[links]
+source = "https://gitlab.com/yaq/yaqd-horiba"
+bugtracker = "https://gitlab.com/yaq/yaqd-horiba/issues"
+manufacturer = "https://www.horiba.com/en_en/products/detail/action/show/Product/ihr-series-1590/"
+
+[installation]
+PyPI = "https://pypi.org/project/yaqd-horiba/"
+conda-forge = "https://anaconda.org/conda-forge/yaqd-horiba/"
+
+[config]
+gratings.type = {"type"="array", "items"="float"}
+gratings.default = [1200, 1200]
+gratings.doc = "Array of lines/mm for the installed turrets"
+make.default = "Horiba Jobin-Yvon"
+model.default = "IHR320"
+
+[state]
+turret.default = 0
+
+mirrors.type = {"type"="array", "items"="mirror_setting"}
+mirrors.default = ["front", "front"]
+mirrors.doc = "Position of the mirror, entrance then exit."
+
+slits.type = {"type"="array", "items"="float"}
+slits.default = [0.0, 0.0, 0.0, 0.0]
+slits.doc = "Width of each slit in mm. order is Front Entrance, Side Entrance, Front Exit, Side Exit"
+
+mirrors_dest.type = {"type"="array", "items"="mirror_setting"}
+mirrors_dest.default = ["front", "front"]
+mirrors_dest.doc = "Destination of the mirror, entrance, then exit"
+
+slits_dest.type = {"type"="array", "items"="float"}
+slits_dest.default = [0.0, 0.0, 0.0, 0.0]
+slits_dest.doc = "Destination of each slit in mm. order is Front Entrance, Side Entrance, Front Exit, Side Exit"
+
+
+[messages]
+get_front_entrance_slit.response = "double"
+get_front_exit_slit.response = "double"
+get_side_entrance_slit.response = "double"
+get_side_exit_slit.response = "double"
+
+set_front_entrance_slit.request = [{"name"= "width", "type"= "double", "doc"= "width in mm"}]
+set_front_exit_slit.request = [{"name"= "width", "type"= "double", "doc"= "width in mm"}]
+set_side_entrance_slit.request = [{"name"= "width", "type"= "double", "doc"= "width in mm"}]
+set_side_exit_slit.request = [{"name"= "width", "type"= "double", "doc"= "width in mm"}]
+
+get_entrance_mirror.response = "mirror_setting"
+get_exit_mirror.response = "mirror_setting"
+
+set_entrance_mirror.request = [{"name"= "side", "type"= "mirror_setting"}]
+set_exit_mirror.request = [{"name"= "side", "type"= "mirror_setting"}]
+
+[fields]
+
+[fields.front_entrance_slit]
+getter = "get_front_entrance_slit"
+setter = "set_front_entrance_slit"
+type = "double"
+
+[fields.side_entrance_slit]
+getter = "get_side_entrance_slit"
+setter = "set_side_entrance_slit"
+type = "double"
+
+[fields.front_exit_slit]
+getter = "get_front_exit_slit"
+setter = "set_front_exit_slit"
+type = "double"
+
+[fields.side_exit_slit]
+getter = "get_side_exit_slit"
+setter = "set_side_exit_slit"
+type = "double"
+
+[fields.entrance_mirror]
+getter = "get_entrance_mirror"
+setter = "set_entrance_mirror"
+type = "mirror_setting"
+
+[fields.exit_mirror]
+getter = "get_exit_mirror"
+setter = "set_exit_mirror"
+type = "mirror_setting"
