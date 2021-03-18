@@ -1,4 +1,4 @@
-protocol = "micro-hr"
+protocol = "horiba-micro-hr"
 doc = "Horiba Jobin-Yvon Micro-Hr monochromator."
 traits = ["has-turret", "is-homeable", "has-limits", "is-daemon"]
 hardware = ["horiba:microhr"]

@@ -30,8 +30,8 @@ mypy:
 entry:
   stage: test
   script:
-    - yaqd-micro-hr --version
-    - yaqd-micro-hr -h
+    - yaqd-horiba-micro-hr --version
+    - yaqd-horiba-micro-hr -h
     - yaqd-horiba-ihr320 --version
     - yaqd-horiba-ihr320 -h
 
