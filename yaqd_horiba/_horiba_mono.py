@@ -71,11 +71,14 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
             B_REQUEST_OUT,
             BM_REQUEST_TYPE,
             wIndex=SET_TURRET,
-            data_or_wLength=struct.pack("<i", self._state["turret"]),
+            data_or_wLength=struct.pack("<i", self._gratings[self._state["turret"]]["index"]),
         )
         self._busy = True
         await self._not_busy_sig.wait()
-        self._state["hw_limits"] = (0.0, 1580 * 1200 / self._gratings[self._state["turret"]])
+        self._state["hw_limits"] = (
+            0.0,
+            1580 * 1200 / self._gratings[self._state["turret"]]["lines_per_mm"],
+        )
         self.set_position(self._state["destination"])
 
     def home(self):
@@ -84,21 +87,24 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
         loop = asyncio.get_event_loop()
         loop.create_task(self._reset_position())
 
-    def set_turret(self, index):
+    def set_turret(self, identifier):
         self._busy = True
-        self.logger.debug(self._state["turret"], index)
+        self.logger.debug(self._state["turret"], identifier)
         if index != self._state["turret"]:
-            self._state["turret"] = index
+            self._state["turret"] = identifier
             loop = asyncio.get_event_loop()
             loop.create_task(self._reset_position())
 
     def get_turret(self):
         return self._state["turret"]
 
+    def get_turret_options(self):
+        return list(self._gratings.keys())
+
     def _set_position(self, position):
         # Mono assumes 1200 lines/mm, adjust accordingly
         self.logger.debug(position)
-        position = position * self._gratings[self._state["turret"]] / 1200.0
+        position = position * self._gratings[self._state["turret"]]["lines_per_mm"] / 1200.0
         self.logger.debug(position)
         self._dev.ctrl_transfer(
             B_REQUEST_OUT,
@@ -120,7 +126,7 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
                 ),
             )[0]
             self._state["position"] = self._state["position"] / (
-                self._gratings[self._state["turret"]] / 1200.0
+                self._gratings[self._state["turret"]]["lines_per_mm"] / 1200.0
             )
             await asyncio.sleep(0.01)
             await self._busy_sig.wait()

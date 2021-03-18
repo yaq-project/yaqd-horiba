@@ -7,14 +7,13 @@
             "type": "boolean"
         },
         "gratings": {
-            "default": [
-                1200,
-                1200
-            ],
-            "doc": "Array of lines/mm for the installed turrets",
+            "default": {
+                "default": {}
+            },
+            "doc": "Map which gives a label to a grating with its lines/mm and index",
             "type": {
-                "items": "float",
-                "type": "array"
+                "type": "map",
+                "values": "horiba_grating"
             }
         },
         "limits": {
@@ -515,6 +514,22 @@
                 "side"
             ],
             "type": "enum"
+        },
+        {
+            "fields": [
+                {
+                    "default": 0,
+                    "name": "index",
+                    "type": "int"
+                },
+                {
+                    "default": 1200.0,
+                    "name": "lines_per_mm",
+                    "type": "float"
+                }
+            ],
+            "name": "horiba_grating",
+            "type": "record"
         },
         {
             "fields": [
