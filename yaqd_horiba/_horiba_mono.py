@@ -59,6 +59,9 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
         self._gratings = config["gratings"]
         self._units = "nm"
 
+        if self._state["turret"] is None:
+            self._state["turret"] = self._gratings.keys()[0]
+
         self.home()
 
     async def _reset_position(self):

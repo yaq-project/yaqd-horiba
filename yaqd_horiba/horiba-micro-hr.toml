@@ -28,5 +28,3 @@ gratings.doc = "Map which gives a label to a grating with its lines/mm and index
 make.default = "Horiba Jobin-Yvon"
 model.default = "MicroHR"
 
-[state]
-turret.default = 0

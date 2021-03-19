@@ -330,7 +330,7 @@
             "type": "double"
         },
         "turret": {
-            "default": 0,
+            "default": null,
             "doc": "Current turret index",
             "origin": "has-turret",
             "type": [
