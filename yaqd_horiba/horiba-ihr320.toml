@@ -9,6 +9,15 @@ type = "enum"
 name = "mirror_setting"
 symbols = ["front", "side"]
 
+[[types]]
+type = "record"
+name = "horiba_grating"
+fields = [
+    {"name"="index", "type"="int", "default"=0},
+    {"name"="lines_per_mm", "type"="float", "default"=1200.0},
+]
+
+
 [links]
 source = "https://gitlab.com/yaq/yaqd-horiba"
 bugtracker = "https://gitlab.com/yaq/yaqd-horiba/issues"
@@ -19,9 +28,10 @@ PyPI = "https://pypi.org/project/yaqd-horiba/"
 conda-forge = "https://anaconda.org/conda-forge/yaqd-horiba/"
 
 [config]
-gratings.type = {"type"="array", "items"="float"}
-gratings.default = [1200, 1200]
-gratings.doc = "Array of lines/mm for the installed turrets"
+gratings.type = {"type"="map", "values"="horiba_grating"}
+gratings.default = {"default"={}}
+gratings.doc = "Map which gives a label to a grating with its lines/mm and index"
+
 make.default = "Horiba Jobin-Yvon"
 model.default = "IHR320"
 
