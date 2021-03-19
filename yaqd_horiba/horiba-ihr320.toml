@@ -36,7 +36,6 @@ make.default = "Horiba Jobin-Yvon"
 model.default = "IHR320"
 
 [state]
-turret.default = 0
 
 mirrors.type = {"type"="array", "items"="mirror_setting"}
 mirrors.default = ["front", "front"]

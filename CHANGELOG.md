@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [2021.3.0]
+
 ### Changed
 - micro-hr renamed to horiba-micro-hr for consistency in the ecosystem
 - updated configuration for gratings to have a string rather than integer

@@ -22,7 +22,7 @@ repos:
         exclude: ^docs/conf.py
 
   - repo: https://gitlab.com/yaq/yaq-traits
-    rev: v2021.3.0
+    rev: v2021.3.2
     hooks:
       - id: yaq-traits-check
       - id: yaq-traits-compose
