@@ -60,7 +60,7 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
         self._units = "nm"
 
         if self._state["turret"] is None:
-            self._state["turret"] = self._gratings.keys()[0]
+            self._state["turret"] = list(self._gratings.keys())[0]
 
         self.home()
 
@@ -93,7 +93,7 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
     def set_turret(self, identifier):
         self._busy = True
         self.logger.debug(self._state["turret"], identifier)
-        if index != self._state["turret"]:
+        if identifier != self._state["turret"]:
             self._state["turret"] = identifier
             loop = asyncio.get_event_loop()
             loop.create_task(self._reset_position())
