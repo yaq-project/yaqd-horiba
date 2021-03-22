@@ -122,7 +122,7 @@ class HoribaIHR320(HoribaMono):
                 ),
             )[0]
             self._state["position"] = self._state["position"] / (
-                self._gratings[self._state["turret"]] / 1200.0
+                self._gratings[self._state["turret"]]["lines_per_mm"] / 1200.0
             )
             for i in range(4):
                 self._state["slits"][i] = self._get_slit(i)
