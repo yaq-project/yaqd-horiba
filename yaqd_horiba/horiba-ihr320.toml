@@ -65,40 +65,63 @@ set_front_exit_slit.request = [{"name"= "width", "type"= "double", "doc"= "width
 set_side_entrance_slit.request = [{"name"= "width", "type"= "double", "doc"= "width in mm"}]
 set_side_exit_slit.request = [{"name"= "width", "type"= "double", "doc"= "width in mm"}]
 
+get_slit_units.response = "string"
+get_slit_limits.response = {"type"="array", "items"="double"}
+
 get_entrance_mirror.response = "mirror_setting"
 get_exit_mirror.response = "mirror_setting"
 
 set_entrance_mirror.request = [{"name"= "side", "type"= "mirror_setting"}]
 set_exit_mirror.request = [{"name"= "side", "type"= "mirror_setting"}]
 
-[fields]
+[properties]
 
-[fields.front_entrance_slit]
+[properties.front_entrance_slit]
 getter = "get_front_entrance_slit"
 setter = "set_front_entrance_slit"
+units_getter = "get_slit_units"
+limits_getter = "get_slit_limits"
+control_kind = "normal"
+record_kind = "metadata"
 type = "double"
 
-[fields.side_entrance_slit]
+[properties.side_entrance_slit]
 getter = "get_side_entrance_slit"
 setter = "set_side_entrance_slit"
+units_getter = "get_slit_units"
+limits_getter = "get_slit_limits"
+control_kind = "normal"
+record_kind = "metadata"
 type = "double"
 
-[fields.front_exit_slit]
+[properties.front_exit_slit]
 getter = "get_front_exit_slit"
 setter = "set_front_exit_slit"
+units_getter = "get_slit_units"
+limits_getter = "get_slit_limits"
+control_kind = "normal"
+record_kind = "metadata"
 type = "double"
 
-[fields.side_exit_slit]
+[properties.side_exit_slit]
 getter = "get_side_exit_slit"
 setter = "set_side_exit_slit"
+units_getter = "get_slit_units"
+limits_getter = "get_slit_limits"
+control_kind = "normal"
+record_kind = "metadata"
 type = "double"
 
-[fields.entrance_mirror]
+[properties.entrance_mirror]
 getter = "get_entrance_mirror"
 setter = "set_entrance_mirror"
+control_kind = "normal"
+record_kind = "metadata"
 type = "mirror_setting"
 
-[fields.exit_mirror]
+[properties.exit_mirror]
 getter = "get_exit_mirror"
 setter = "set_exit_mirror"
+control_kind = "normal"
+record_kind = "metadata"
 type = "mirror_setting"
