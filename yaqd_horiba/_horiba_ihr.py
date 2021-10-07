@@ -76,6 +76,12 @@ class HoribaIHR320(HoribaMono):
     def set_side_exit_slit(self, width):
         return self._set_slit(3, width)
 
+    def get_slit_limits(self):
+        return (0, 7)
+
+    def get_slit_units(self):
+        return "mm"
+
     def _get_mirror(self, index: int):
         # this assumes 2 mm slits, may be different for 7 mm slits
         data = self._dev.ctrl_transfer(

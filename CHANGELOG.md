@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Changed
+- Convert IHR320 slit and mirror fields into properties, with added getters
+
 ## [2021.3.1]
 
 ### Fixed
