@@ -76,7 +76,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 ### Added
 - initial release
 
-[Unreleased]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.10.0...master
+[Unreleased]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.10.0...main
 [2021.10.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.3.1...2021.10.0
 [2021.3.1]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.3.0...2021.3.1
 [2021.3.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.1.0...2021.3.0
