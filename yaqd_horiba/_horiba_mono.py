@@ -91,6 +91,8 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
         loop.create_task(self._reset_position())
 
     def set_turret(self, identifier):
+        if identifier not in self._gratings:
+            raise ValueError(f"No such grating {identifier}")
         self._busy = True
         self.logger.debug(self._state["turret"], identifier)
         if identifier != self._state["turret"]:

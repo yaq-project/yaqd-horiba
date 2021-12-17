@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Fixed
+- Raise when invalid turret requested
+
 ## [2021.10.0]
 
 ### Changed
