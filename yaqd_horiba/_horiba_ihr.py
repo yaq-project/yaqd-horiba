@@ -1,4 +1,5 @@
 import asyncio
+import math
 import struct
 
 import usb.core  # type: ignore
@@ -26,6 +27,10 @@ class HoribaIHR320(HoribaMono):
 
     async def _reset_position(self):
         await super()._reset_position()
+        await self._not_busy_sig.wait()
+        # Initialization takes a bit of time to be able to process mirror and slit changes
+        await asyncio.sleep(5)
+
         for i in range(2):
             self._set_mirror(i, self._state["mirrors_dest"][i])
         for i in range(4):
@@ -41,6 +46,8 @@ class HoribaIHR320(HoribaMono):
 
     def _set_slit(self, index: int, width: float):
         """Set slit with index to width (in mm)"""
+        if math.isnan(width):
+            return
         self._busy = True
         self._state["slits_dest"][index] = width
         const = 7 / 1000
@@ -120,19 +127,26 @@ class HoribaIHR320(HoribaMono):
             busy = self._dev.ctrl_transfer(
                 B_REQUEST_IN, BM_REQUEST_TYPE, wIndex=IS_BUSY, data_or_wLength=4
             )
-            self._busy = struct.unpack("<i", busy)[0]
-            self._state["position"] = struct.unpack(
+            busy = struct.unpack("<i", busy)[0]
+            prev_position = self._state["position"]
+            reported_position = struct.unpack(
                 "<f",
                 self._dev.ctrl_transfer(
                     B_REQUEST_IN, BM_REQUEST_TYPE, wIndex=READ_WAVELENGTH, data_or_wLength=4
                 ),
             )[0]
-            self._state["position"] = self._state["position"] / (
+            self._state["position"] = reported_position / (
                 self._gratings[self._state["turret"]]["lines_per_mm"] / 1200.0
             )
+            still = prev_position == self._state["position"]
             for i in range(4):
+                prev_position = self._state["slits"][i]
                 self._state["slits"][i] = self._get_slit(i)
+                still = still and (prev_position == self._state["slits"][i])
             for i in range(2):
                 self._state["mirrors"][i] = self._get_mirror(i)
-            await asyncio.sleep(0.01)
-            await self._busy_sig.wait()
+            self._busy = busy or not still
+            if not self._busy:
+                await asyncio.sleep(0.1)
+            else:
+                await asyncio.sleep(0.01)

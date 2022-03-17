@@ -7,6 +7,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ### Fixed
 - Raise when invalid turret requested
+- Wait before setting slits and mirrors on startup/home so that they are set properly
+- Add a stillness check to computation of busy
+    - things like intermittant firmware busy going low due to e.g. backlashing
+- Always loop update state instead of waiting for busy to go true. This ensures the slits are properly read
+    - previously had be actually setting correctly but not updating reported position
+- Avoid trying to set slits to NaN, which would raise an exception and prevent additional slits from being set
 
 ## [2021.10.0]
 
