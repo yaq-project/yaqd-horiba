@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [2022.3.0]
+
 ### Fixed
 - Raise when invalid turret requested
 - Wait before setting slits and mirrors on startup/home so that they are set properly
@@ -85,11 +87,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 ### Added
 - initial release
 
-[Unreleased]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.10.0...main
-[2021.10.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.3.1...2021.10.0
-[2021.3.1]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.3.0...2021.3.1
-[2021.3.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.1.0...2021.3.0
-[2021.1.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2020.11.1...2021.1.0
+[Unreleased]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2022.3.0...main
+[2022.3.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.10.1...v2022.3.0
+[2021.10.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.3.1...v2021.10.0
+[2021.3.1]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.3.0...v2021.3.1
+[2021.3.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.1.0...v2021.3.0
+[2021.1.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2020.11.1...v2021.1.0
 [2020.11.1]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2020.11.0...v2020.11.1
 [2020.11.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2020.07.0...v2020.11.0
 [2020.07.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2020.05.0...v2020.07.0
