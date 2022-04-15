@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Changed
+- Add try/except in update state to avoid intermittant failures
+
 ## [2022.3.0]
 
 ### Fixed
