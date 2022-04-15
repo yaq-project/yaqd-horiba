@@ -124,28 +124,31 @@ class HoribaIHR320(HoribaMono):
 
     async def update_state(self):
         while True:
-            busy = self._dev.ctrl_transfer(
-                B_REQUEST_IN, BM_REQUEST_TYPE, wIndex=IS_BUSY, data_or_wLength=4
-            )
-            busy = struct.unpack("<i", busy)[0]
-            prev_position = self._state["position"]
-            reported_position = struct.unpack(
-                "<f",
-                self._dev.ctrl_transfer(
-                    B_REQUEST_IN, BM_REQUEST_TYPE, wIndex=READ_WAVELENGTH, data_or_wLength=4
-                ),
-            )[0]
-            self._state["position"] = reported_position / (
-                self._gratings[self._state["turret"]]["lines_per_mm"] / 1200.0
-            )
-            still = prev_position == self._state["position"]
-            for i in range(4):
-                prev_position = self._state["slits"][i]
-                self._state["slits"][i] = self._get_slit(i)
-                still = still and (prev_position == self._state["slits"][i])
-            for i in range(2):
-                self._state["mirrors"][i] = self._get_mirror(i)
-            self._busy = busy or not still
+            try:
+                busy = self._dev.ctrl_transfer(
+                    B_REQUEST_IN, BM_REQUEST_TYPE, wIndex=IS_BUSY, data_or_wLength=4
+                )
+                busy = struct.unpack("<i", busy)[0]
+                prev_position = self._state["position"]
+                reported_position = struct.unpack(
+                    "<f",
+                    self._dev.ctrl_transfer(
+                        B_REQUEST_IN, BM_REQUEST_TYPE, wIndex=READ_WAVELENGTH, data_or_wLength=4
+                    ),
+                )[0]
+                self._state["position"] = reported_position / (
+                    self._gratings[self._state["turret"]]["lines_per_mm"] / 1200.0
+                )
+                still = prev_position == self._state["position"]
+                for i in range(4):
+                    prev_position = self._state["slits"][i]
+                    self._state["slits"][i] = self._get_slit(i)
+                    still = still and (prev_position == self._state["slits"][i])
+                for i in range(2):
+                    self._state["mirrors"][i] = self._get_mirror(i)
+                self._busy = busy or not still
+            except Exception as e:
+                self.logger.error(repr(e))
             if not self._busy:
                 await asyncio.sleep(0.1)
             else:
