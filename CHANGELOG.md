@@ -22,6 +22,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Avoid trying to set slits to NaN, which would raise an exception and prevent additional slits from being set
 
 ## [2021.10.0]
+## [2022.4.0]
+
+
 
 ### Changed
 - Convert IHR320 slit and mirror fields into properties, with added getters
@@ -93,7 +96,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - initial release
 
 [Unreleased]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2022.4.0...main
-[2022.4.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2022.3.1...v2022.4.0
+[2022.4.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2022.3.0...v2022.4.0
 [2022.3.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.10.1...v2022.3.0
 [2021.10.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.3.1...v2021.10.0
 [2021.3.1]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.3.0...v2021.3.1
