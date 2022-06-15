@@ -5,8 +5,7 @@ build-backend = "flit_core.buildapi"
 [tool.flit.metadata]
 module = "yaqd_horiba"
 dist-name = "yaqd-horiba"
-author = "yaq Developers"
-author-email = "git@ksunden.space"
+author = "yaq developers"
 home-page = "https://yaq.fyi"
 description-file = "README.md"
 requires-python = ">=3.7"
@@ -23,8 +22,8 @@ classifiers = [
 ]
 
 [tool.flit.metadata.urls]
-Source = "https://gitlab.com/yaq/yaqd-horiba"
-Issues = "https://gitlab.com/yaq/yaqd-horiba/issues"
+Source = "https://github.com/yaq-project/yaqd-horiba"
+Issues = "https://github.com/yaq-project/yaqd-horiba/issues"
 
 [tool.flit.metadata.requires-extra]
 dev = ["black", "pre-commit"]

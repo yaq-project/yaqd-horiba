@@ -103,9 +103,9 @@
         "conda-forge": "https://anaconda.org/conda-forge/yaqd-horiba/"
     },
     "links": {
-        "bugtracker": "https://gitlab.com/yaq/yaqd-horiba/issues",
+        "bugtracker": "https://github.com/yaq-project/yaqd-horiba/issues",
         "manufacturer": "https://www.horiba.com/en_en/products/detail/action/show/Product/microhr-series-1591/",
-        "source": "https://gitlab.com/yaq/yaqd-horiba"
+        "source": "https://github.com/yaq-project/yaqd-horiba"
     },
     "messages": {
         "busy": {

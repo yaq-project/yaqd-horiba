@@ -19,8 +19,8 @@ fields = [
 
 
 [links]
-source = "https://gitlab.com/yaq/yaqd-horiba"
-bugtracker = "https://gitlab.com/yaq/yaqd-horiba/issues"
+source = "https://github.com/yaq-project/yaqd-horiba"
+bugtracker = "https://github.com/yaq-project/yaqd-horiba/issues"
 manufacturer = "https://www.horiba.com/en_en/products/detail/action/show/Product/ihr-series-1590/"
 
 [installation]
