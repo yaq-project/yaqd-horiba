@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [2022.6.0]
+
+### Changed
+-- migrated to Github
+
 ## [2022.4.0]
 
 ### Changed
@@ -95,15 +100,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 ### Added
 - initial release
 
-[Unreleased]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2022.4.0...main
-[2022.4.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2022.3.0...v2022.4.0
-[2022.3.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.10.1...v2022.3.0
-[2021.10.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.3.1...v2021.10.0
-[2021.3.1]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.3.0...v2021.3.1
-[2021.3.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2021.1.0...v2021.3.0
-[2021.1.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2020.11.1...v2021.1.0
-[2020.11.1]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2020.11.0...v2020.11.1
-[2020.11.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2020.07.0...v2020.11.0
-[2020.07.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v2020.05.0...v2020.07.0
-[2020.05.0]: https://gitlab.com/yaq/yaqd-horiba/-/compare/v0.1.0...v2020.05.0
-[0.1.0]: https://gitlab.com/yaq/yaqd-horiba/-/tags/v0.1.0
+[Unreleased]: https://github.com/yaq-project/yaqd-horiba/compare/v2022.6.0...main
+[2022.6.0]: https://github.com/yaq-project/yaqd-horiba/compare/v2022.6.0...v2022.4.0
+[2022.4.0]: https://github.com/yaq-project/yaqd-horiba/compare/v2022.3.0...v2022.4.0
+[2022.3.0]: https://github.com/yaq-project/yaqd-horiba/compare/v2021.10.1...v2022.3.0
+[2021.10.0]: https://github.com/yaq-project/yaqd-horiba/compare/v2021.3.1...v2021.10.0
+[2021.3.1]: https://github.com/yaq-project/yaqd-horiba/compare/v2021.3.0...v2021.3.1
+[2021.3.0]: https://github.com/yaq-project/yaqd-horiba/compare/v2021.1.0...v2021.3.0
+[2021.1.0]: https://github.com/yaq-project/yaqd-horiba/compare/v2020.11.1...v2021.1.0
+[2020.11.1]: https://github.com/yaq-project/yaqd-horiba/compare/v2020.11.0...v2020.11.1
+[2020.11.0]: https://github.com/yaq-project/yaqd-horiba/compare/v2020.07.0...v2020.11.0
+[2020.07.0]: https://github.com/yaq-project/yaqd-horiba/compare/v2020.05.0...v2020.07.0
+[2020.05.0]: https://github.com/yaq-project/yaqd-horiba/compare/v0.1.0...v2020.05.0
+[0.1.0]: https://github.com/yaq-project/yaqd-horiba/releases/tag/v0.1.0
