@@ -7,6 +7,7 @@ hardware = ["horiba:microhr"]
 source = "https://github.com/yaq-project/yaqd-horiba"
 bugtracker = "https://github.com/yaq-project/yaqd-horiba/issues"
 manufacturer = "https://www.horiba.com/en_en/products/detail/action/show/Product/microhr-series-1591/"
+example-configs = "https://github.com/yaq-project/yaqd-horiba/tree/main/example-yaq-configs/horiba-micro-hr"
 
 [installation]
 PyPI = "https://pypi.org/project/yaqd-horiba/"
