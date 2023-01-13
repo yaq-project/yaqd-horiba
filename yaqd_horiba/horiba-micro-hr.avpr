@@ -104,6 +104,7 @@
     },
     "links": {
         "bugtracker": "https://github.com/yaq-project/yaqd-horiba/issues",
+        "example-configs": "https://github.com/yaq-project/yaqd-horiba/tree/main/example-yaq-configs/horiba-micro-hr",
         "manufacturer": "https://www.horiba.com/en_en/products/detail/action/show/Product/microhr-series-1591/",
         "source": "https://github.com/yaq-project/yaqd-horiba"
     },

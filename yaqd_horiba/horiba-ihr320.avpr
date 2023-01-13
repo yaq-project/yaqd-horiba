@@ -104,6 +104,7 @@
     },
     "links": {
         "bugtracker": "https://github.com/yaq-project/yaqd-horiba/issues",
+        "example-configs": "https://github.com/yaq-project/yaqd-horiba/tree/main/example-yaq-configs/horiba-ihr320",
         "manufacturer": "https://www.horiba.com/en_en/products/detail/action/show/Product/ihr-series-1590/",
         "source": "https://github.com/yaq-project/yaqd-horiba"
     },
