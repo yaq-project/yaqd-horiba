@@ -13,6 +13,8 @@ This package contains the following daemon(s):
 - [yaqd-horiba-micro-hr](https://yaq.fyi/daemons/horiba-micro-hr/)
 - [yaqd-horiba-ihr320](https://yaq.fyi/daemons/horiba-ihr320/)
 
+Example configuration files are included in the example-yaq-configs folder.
+
 ## drivers
 
 This program does not use the manufacturer provided drivers for the device. Instead it uses libusb. I use https://zadig.akeo.ie/ to override the driver to WinUSB. (This has the advantage of being able to be rolled back to the manufacturer drivers if needed)
