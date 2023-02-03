@@ -43,6 +43,7 @@ class HoribaIHR320(HoribaMono):
                         await self._reset_position()
                         continue
                 break
+
         self._loop.create_task(try_forever())
 
     async def _reset_position(self):
