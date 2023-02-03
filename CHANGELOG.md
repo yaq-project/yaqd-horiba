@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Changed
+- try forever to force mirros and slits to position in initial state dictionary
+
 ## [2023.1.0]
 
 ### Added
