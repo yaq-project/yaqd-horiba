@@ -35,7 +35,7 @@ class HoribaIHR320(HoribaMono):
                     self._state["mirrors_dest"][i] = startup_state["mirrors_dest"][i]
                     await self._reset_position()
                     continue
-            for in range(4):
+            for i in range(4):
                 if startup_state["slits_dest"][i] != self._get_slit(i):
                     self._state["slits_dest"][i] = startup_state["slits_dest"][i]
                     await self._reset_position()
