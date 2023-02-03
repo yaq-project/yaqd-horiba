@@ -31,7 +31,7 @@ class HoribaIHR320(HoribaMono):
         while True:
             await self._not_busy_sig.wait()
             for i in range(2):
-                if startup_state["mirrors_dest"][i] != self._get_mirror(i) 
+                if startup_state["mirrors_dest"][i] != self._get_mirror(i)
                     self._state["mirrors_dest"][i] = startup_state["mirrors_dest"][i]
                     await self._reset_position()
                     continue
