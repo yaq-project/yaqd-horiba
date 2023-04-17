@@ -67,6 +67,11 @@
                 "string"
             ]
         },
+        "offset": {
+            "default": 0.0,
+            "doc": "Manual global offset for position in nm",
+            "type": "float"
+        },
         "out_of_limits": {
             "default": "closest",
             "doc": "Control behavior of daemon when set_position is given a value outside of limits.",
