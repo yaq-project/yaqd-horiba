@@ -58,7 +58,6 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
         self.serial = self._dev.serial_number
         self._gratings = config["gratings"]
         self._units = "nm"
-        self._offset = config["offset"]
 
         if self._state["turret"] is None:
             self._state["turret"] = list(self._gratings.keys())[0]
@@ -109,7 +108,7 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
 
     def _set_position(self, position):
         # Mono assumes 1200 lines/mm, adjust accordingly
-        position=position+self._offset
+        position = position + self._gratings[self._state["turret"]]["offset"]
         self._state["destination"] = position
         self.logger.debug(position)
         position = position * self._gratings[self._state["turret"]]["lines_per_mm"] / 1200.0
@@ -136,7 +135,7 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
                 )[0]
                 self._state["position"] = (self._state["position"] / (
                     self._gratings[self._state["turret"]]["lines_per_mm"] / 1200.0
-                ) + self._offset)
+                ) + self._gratings[self._state["turret"]]["offset"])
             except Exception as e:
                 self.logger.error(repr(e))
             await asyncio.sleep(0.01)

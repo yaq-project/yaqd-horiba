@@ -10,7 +10,7 @@
             "default": {
                 "default": {}
             },
-            "doc": "Map which gives a label to a grating with its lines/mm and index",
+            "doc": "Map which gives a label to a grating with its lines/mm, index, and offset",
             "type": {
                 "type": "map",
                 "values": "horiba_grating"
@@ -66,11 +66,6 @@
                 "null",
                 "string"
             ]
-        },
-        "offset": {
-            "default": 0.0,
-            "doc": "Manual global offset for position in nm",
-            "type": "float"
         },
         "out_of_limits": {
             "default": "closest",
@@ -349,6 +344,11 @@
                 {
                     "default": 1200.0,
                     "name": "lines_per_mm",
+                    "type": "float"
+                },
+                {
+                    "default": 0.0,
+                    "name": "offset",
                     "type": "float"
                 }
             ],
