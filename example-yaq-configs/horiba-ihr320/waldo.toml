@@ -1,0 +1,12 @@
+[mono]
+port=39876
+[mono.gratings]
+[mono.gratings.uvvis600]
+lines_per_mm=600
+index=0
+[mono.gratings.idler100]
+lines_per_mm = 100
+index = 1
+[mono.gratings.dfg75]
+lines_per_mm = 75
+index=2

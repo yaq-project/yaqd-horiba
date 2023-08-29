@@ -1,0 +1,10 @@
+[wm]
+log_to_file = true
+port=39876
+[wm.gratings]
+[wm.gratings.150lpmm-1200nm]
+lines_per_mm=150
+index=0
+[wm.gratings.300lpmm-500nm]
+lines_per_mm = 300
+index = 1
