@@ -10,7 +10,7 @@
             "default": {
                 "default": {}
             },
-            "doc": "Map which gives a label to a grating with its lines/mm and index",
+            "doc": "Map which gives a label to a grating with its lines/mm, index, and nm offset error",
             "type": {
                 "type": "map",
                 "values": "horiba_grating"
@@ -260,13 +260,13 @@
     },
     "properties": {
         "destination": {
-            "control_kind": "normal",
+            "control_kind": "hinted",
             "dynamic": true,
             "getter": "get_destination",
-            "limits_getter": null,
+            "limits_getter": "get_limits",
             "options_getter": null,
             "record_kind": "data",
-            "setter": null,
+            "setter": "set_position",
             "type": "double",
             "units_getter": "get_units"
         },
@@ -277,7 +277,7 @@
             "limits_getter": "get_limits",
             "options_getter": null,
             "record_kind": "data",
-            "setter": "set_position",
+            "setter": null,
             "type": "double",
             "units_getter": "get_units"
         },
@@ -343,6 +343,11 @@
                 {
                     "default": 1200.0,
                     "name": "lines_per_mm",
+                    "type": "float"
+                },
+                {
+                    "default": 0.0,
+                    "name": "offset",
                     "type": "float"
                 }
             ],

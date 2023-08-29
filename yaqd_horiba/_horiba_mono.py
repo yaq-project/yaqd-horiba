@@ -109,7 +109,8 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
     def _set_position(self, position):
         # Mono assumes 1200 lines/mm, adjust accordingly
         self.logger.debug(position)
-        position = position * self._gratings[self._state["turret"]]["lines_per_mm"] / 1200.0
+        position = (position - self._gratings[self._state["turret"]]["offset"]) * \
+            self._gratings[self._state["turret"]]["lines_per_mm"] / 1200.0
         self.logger.debug(position)
         self._dev.ctrl_transfer(
             B_REQUEST_OUT,
@@ -125,15 +126,14 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
                     B_REQUEST_IN, BM_REQUEST_TYPE, wIndex=IS_BUSY, data_or_wLength=4
                 )
                 self._busy = struct.unpack("<i", busy)[0]
-                self._state["position"] = struct.unpack(
+                position = struct.unpack(
                     "<f",
                     self._dev.ctrl_transfer(
                         B_REQUEST_IN, BM_REQUEST_TYPE, wIndex=READ_WAVELENGTH, data_or_wLength=4
                     ),
                 )[0]
-                self._state["position"] = self._state["position"] / (
-                    self._gratings[self._state["turret"]]["lines_per_mm"] / 1200.0
-                )
+                offset=self._gratings[self._state["turret"]]["offset"]
+                self._state["position"] = (position) / (self._gratings[self._state["turret"]]["lines_per_mm"] / 1200.0) + offset
             except Exception as e:
                 self.logger.error(repr(e))
             await asyncio.sleep(0.01)
