@@ -19,12 +19,13 @@ name = "horiba_grating"
 fields = [
     {"name"="index", "type"="int", "default"=0},
     {"name"="lines_per_mm", "type"="float", "default"=1200.0},
+    {"name"="offset", "type"="float", "default"=0.0},
 ]
 
 [config]
 gratings.type = {"type"="map", "values"="horiba_grating"}
 gratings.default = {"default"={}}
-gratings.doc = "Map which gives a label to a grating with its lines/mm and index"
+gratings.doc = "Map which gives a label to a grating with its lines/mm, index, and nm offset error"
 
 make.default = "Horiba Jobin-Yvon"
 model.default = "MicroHR"

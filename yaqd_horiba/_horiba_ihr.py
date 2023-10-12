@@ -136,9 +136,10 @@ class HoribaIHR320(HoribaMono):
                         B_REQUEST_IN, BM_REQUEST_TYPE, wIndex=READ_WAVELENGTH, data_or_wLength=4
                     ),
                 )[0]
-                self._state["position"] = reported_position / (
+                offset = self._gratings[self._state["turret"]]["offset"]
+                self._state["position"] = (reported_position) / (
                     self._gratings[self._state["turret"]]["lines_per_mm"] / 1200.0
-                )
+                ) + offset
                 still = prev_position == self._state["position"]
                 for i in range(4):
                     prev_position = self._state["slits"][i]
