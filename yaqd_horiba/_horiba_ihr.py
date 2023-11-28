@@ -25,6 +25,28 @@ class HoribaIHR320(HoribaMono):
     _kind = "horiba-ihr320"
     _ID_PRODUCT = IHR320_ID_PRODUCT
 
+    def __init__(self, *args, **kwargs):
+        startup_state = dict(self._state)
+        __super__().__init__(*args, **kwargs)
+
+        async def try_forever():
+            neqs = True
+            while neqs:
+                neqs = False
+                await self._not_busy_sig.wait()
+                for i in range(2):
+                    if startup_state["mirrors_dest"][i] != self._get_mirror(i):
+                        self._state["mirrors_dest"][i] = startup_state["mirrors_dest"][i]
+                        await self._reset_position()
+                        neqs = True
+                for i in range(4):
+                    if startup_state["slits_dest"][i] != self._get_slit(i):
+                        self._state["slits_dest"][i] = startup_state["slits_dest"][i]
+                        await self._reset_position()
+                        neqs = True
+
+        self._loop.create_task(try_forever())
+
     async def _reset_position(self):
         await super()._reset_position()
         await self._not_busy_sig.wait()
