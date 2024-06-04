@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Added
+- nm offset corrections per grating in config for ihr-320 and micro-hr daemons,
+  updated example config for ihr-320
+
 ## [2023.1.0]
 
 ### Added
