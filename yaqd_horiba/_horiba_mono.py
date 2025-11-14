@@ -87,8 +87,7 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
     def home(self):
         # Send "Initialize command, which homes the motor"
         self._dev.ctrl_transfer(0x40, 0xB3, wValue=0, wIndex=0)
-        loop = asyncio.get_event_loop()
-        loop.create_task(self._reset_position())
+        self._loop.create_task(self._reset_position())
 
     def set_turret(self, identifier):
         if identifier not in self._gratings:
@@ -97,8 +96,7 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
         self.logger.debug(self._state["turret"], identifier)
         if identifier != self._state["turret"]:
             self._state["turret"] = identifier
-            loop = asyncio.get_event_loop()
-            loop.create_task(self._reset_position())
+            self._loop.create_task(self._reset_position())
 
     def get_turret(self):
         return self._state["turret"]
