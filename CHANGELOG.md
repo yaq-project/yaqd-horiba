@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Fixed
+- asyncio implementation works with python 3.14
+
 ## [2023.1.0]
 
 ### Added
