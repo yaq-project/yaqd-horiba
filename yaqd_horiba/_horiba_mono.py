@@ -5,6 +5,8 @@ import usb.core  # type: ignore
 
 from yaqd_core import HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon
 
+from ._taskset import TaskSet
+
 
 __all__ = ["HoribaMono"]
 
@@ -58,6 +60,7 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
         self.serial = self._dev.serial_number
         self._gratings = config["gratings"]
         self._units = "nm"
+        self.tasks = TaskSet()
 
         if self._state["turret"] is None:
             self._state["turret"] = list(self._gratings.keys())[0]
@@ -87,7 +90,7 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
     def home(self):
         # Send "Initialize command, which homes the motor"
         self._dev.ctrl_transfer(0x40, 0xB3, wValue=0, wIndex=0)
-        self._loop.create_task(self._reset_position())
+        self.tasks.from_coro(self._reset_position())
 
     def set_turret(self, identifier):
         if identifier not in self._gratings:
@@ -96,7 +99,7 @@ class HoribaMono(HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon):
         self.logger.debug(self._state["turret"], identifier)
         if identifier != self._state["turret"]:
             self._state["turret"] = identifier
-            self._loop.create_task(self._reset_position())
+            self.tasks.from_coro(self._reset_position())
 
     def get_turret(self):
         return self._state["turret"]
