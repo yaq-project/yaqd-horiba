@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [2025.12.0]
+
 ### Fixed
 - asyncio implementation works with python 3.14
 
@@ -35,9 +37,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Avoid trying to set slits to NaN, which would raise an exception and prevent additional slits from being set
 
 ## [2021.10.0]
-## [2022.4.0]
-
-
 
 ### Changed
 - Convert IHR320 slit and mirror fields into properties, with added getters
@@ -108,7 +107,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/yaq-project/yaqd-horiba/compare/v2023.1.0...main
+[Unreleased]: https://github.com/yaq-project/yaqd-horiba/compare/v2025.12.0...main
+[2025.12.0]: https://github.com/yaq-project/yaqd-horiba/compare/v2023.1.0...v2025.12.0
 [2023.1.0]: https://github.com/yaq-project/yaqd-horiba/compare/v2022.6.0...v2023.1.0
 [2022.6.0]: https://github.com/yaq-project/yaqd-horiba/compare/v2022.6.0...v2022.4.0
 [2022.4.0]: https://github.com/yaq-project/yaqd-horiba/compare/v2022.3.0...v2022.4.0
