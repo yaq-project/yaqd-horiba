@@ -1,6 +1,4 @@
-"""helper for keeping tasks from premature garbage collection
-"""
-
+"""helper for keeping tasks from premature garbage collection"""
 
 import asyncio
 
