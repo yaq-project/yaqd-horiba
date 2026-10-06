@@ -7,7 +7,6 @@ from yaqd_core import HasTurret, IsHomeable, HasLimits, HasPosition, IsDaemon
 
 from ._taskset import TaskSet
 
-
 __all__ = ["HoribaMono"]
 
 
